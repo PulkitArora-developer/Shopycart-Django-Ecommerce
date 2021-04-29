@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '5wr&o@kd@63=di%3vqzqw_cdk^qvtttzyb^%yg%i^xbl#%k__3'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['shopycart-ecommerce.herokuapp.com','127.0.0.1']
 
