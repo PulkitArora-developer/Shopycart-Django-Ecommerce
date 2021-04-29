@@ -1,0 +1,2 @@
+Key = rzp_test_IlWmFu63lxusiQ
+secret = ir5w1PfJsNxML7smxJ36Bjpu

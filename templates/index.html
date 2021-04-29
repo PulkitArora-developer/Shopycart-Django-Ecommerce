@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ShopyCart | One of the Biggest Online Shopping Platform {% endblock %}
+
+{% block css %}
+<style>
+/* Hide Radio button */
+.rate > input{
+  display: none;
+}
+
+.rate{
+  display: inline-block;;
+  border: 0;
+}
+
+.rate > label{
+  float: right;
+}
+
+/* Showing the stars */
+.rate > label:before{
+  display: inline-block;
+  font-size: 1.1rem;
+  font-family: FontAwesome;
+  content: "\f005";
+  margin:0;
+  padding:0.3rem .2rem;
+  cursor: pointer;
+}
+
+/* Half star */
+.rate .half:before{
+  content: "\f089";
+  position: absolute;
+  padding-right: 0;
+}
+
+/* Click and hover */
+input:checked ~ label, label:hover ~ label{
+  color: #ffb503;
+}
+
+/* hover hightlight */
+input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label{
+  color: #cc9000;
+}
+
+.rating-star i{
+  color: #ffb503 !important;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/1.jpg' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
+	<h3 class="section-title">Popular products</h3>
+</header><!-- sect-heading -->
+
+
+<div class="row">
+	{% for product in products %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{{product.get_url}}" class="img-wrap"> <img src="{{ product.image.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{product.get_url}}" class="title">{{product.product_name}}</a>
+				<div class="price mt-1">&#8377; {{product.price}}</div> <!-- price-wrap.// -->
+				<div class="rating-star">
+					<span>
+						<i class="fa fa-star{% if product.avgRating < 0.5%}-o{% elif product.avgRating >= 0.5 and product.avgRating < 1 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.avgRating < 1.5%}-o{% elif product.avgRating >= 1.5 and product.avgRating < 2 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.avgRating < 2.5%}-o{% elif product.avgRating >= 2.5 and product.avgRating < 3 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.avgRating < 3.5%}-o{% elif product.avgRating >= 3.5 and product.avgRating < 4 %}-half-o{% endif %}"></i>
+						<i class="fa fa-star{% if product.avgRating < 4.5%}-o{% elif product.avgRating >= 4.5 and product.avgRating < 5 %}-half-o{% endif %}"></i>
+					</span>
+				</div>
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+{% endblock %}
+
+
+
+
+
+

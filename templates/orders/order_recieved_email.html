@@ -1,0 +1,12 @@
+{% autoescape off %}
+{% load static %}
+
+
+
+Hi, {{ user.first_name }} {{ user.last_name }}
+
+YOUR ORDER HAS BEEN RECIEVED.
+
+ORDER NUMBER: {{ order.order_number }}
+
+{% endautoescape %}

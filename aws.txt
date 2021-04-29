@@ -1,0 +1,15 @@
+#============ POSTGRES PASSWORD AWS==========================
+
+shopycartuser
+y2fTJT2UqY3V2R!
+
+
+#========== AWS ID ===================================
+apulkit674@gmail.com
+Pulkit@aws
+
+
+#============= Superuser= ==============================
+
+apulkit674
+Pulkit@admin

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Checkout {% endblock %}
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+<div class="row">
+	<aside class="col-lg-6">
+<div class="card">
+<div class="card-body">
+    <h4 class="card-title mb-4 text-center">Billing Address</h4>
+    <form action="{% url 'place_order' %}" method="POST">
+        {% csrf_token %}
+      <div class="row" style="margin-top: 35px;">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="First name" name="first_name" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Last name" name="last_name" required>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 25px;">
+        <div class="col">
+          <input type="email" class="form-control" placeholder="Email-ID" name="email" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Contact No" name="phone" required>
+        </div>
+      </div>
+
+
+      <div class="row" style="margin-top: 25px;">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Address" name="address" required>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 25px;">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Country" name="country" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="State" name="state" required>
+        </div>
+      </div>
+
+        <div class="row" style="margin-top: 25px;">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="City" name="city" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Zip Code" name="zip_code" required>
+        </div>
+      </div>
+
+        <div class="row" style="margin-top: 25px;">
+        <div class="col">
+            <textarea rows="3" class="form-control" placeholder="Order note" name="order_note"></textarea>
+        </div>
+      </div>
+
+
+</div>
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+	<aside class="col-lg-6">
+
+		<div class="card">
+		<div class="card-body">
+
+            <table class="table table-borderless table-shopping-cart">
+                <thead class="text-muted">
+                <tr class="small text-uppercase">
+                  <th scope="col">Product</th>
+                  <th scope="col" width="120">Quantity</th>
+                  <th scope="col" width="120">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for items in cart_items %}
+                <tr>
+                    <td>
+                        <figure class="itemside align-items-center">
+                            <div class="aside"><img src="{{ items.products.image.url }}" class="img-sm"></div>
+                            <figcaption class="info">
+                                <a href="{{ items.products.get_url }}" class="title text-dark">{{ items.products.product_name }}</a>
+                                <p class="text-muted small">
+                                    {% if items.variations.all %}
+                                        {% for item in items.variations.all %}
+                                            {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                    <label for="">{{ items.quantity }}</label>
+                    </td>
+                    <td>
+                        <div class="price-wrap">
+                            <var class="price">&#8377; {{ items.sub_total }}</var>
+                            <small class="text-muted">&#8377; {{ items.products.price }}</small>
+                        </div> <!-- price-wrap .// -->
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+
+			<hr>
+            <button type="submit" name="submit" class="btn btn-primary btn-block">Place Order</button>
+			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+		</div> <!-- card-body.// -->
+            </form>
+		</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+
+{% endblock %}
